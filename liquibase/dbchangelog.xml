@@ -1,0 +1,225 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="mw (generated)" id="1719253502540-1">
+        <createTable tableName="f_account">
+            <column name="initialbalance" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_account_pkey"/>
+            </column>
+            <column name="xid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bank" type="VARCHAR(255)"/>
+            <column name="currency" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revisions" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-2">
+        <createTable tableName="f_category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_category_pkey"/>
+            </column>
+            <column name="parent" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="xid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="revisions" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-3">
+        <createTable tableName="f_currency">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_currency_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-4">
+        <createTable tableName="f_rates">
+            <column name="date" type="date"/>
+            <column name="value" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency_id" type="BIGINT"/>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_rates_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-5">
+        <createTable tableName="f_recurrence">
+            <column name="day" type="INTEGER"/>
+            <column name="frequency" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weekendhandling" type="INTEGER"/>
+            <column name="startdate" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_recurrence_pkey"/>
+            </column>
+            <column name="enddate" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="true"/>
+                </column>
+            <column name="schedule_xid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-6">
+        <createTable tableName="f_schedule">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_schedule_pkey"/>
+            </column>
+            <column name="recurrence_id" type="BIGINT">
+                <constraints nullable="true"/>
+                </column>
+            <column name="transaction_id" type="BIGINT"/>
+            <column name="xid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revisions" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-7">
+        <createTable tableName="f_security">
+            <column name="decimals" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="initialshares" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quotationdecimals" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="BIGINT"/>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_security_pkey"/>
+            </column>
+            <column name="xid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="revisions" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-8">
+        <createTable tableName="f_transaction">
+            <column name="amount" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deposit" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expensecategory" type="INTEGER">
+                <constraints nullable="true"/>
+            </column>
+            <column name="income" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reduction" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shares" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="withdrawal" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account" type="BIGINT"/>
+            <column name="date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="f_category" type="BIGINT"/>
+            <column name="f_debt" type="BIGINT"/>
+            <column name="f_from" type="BIGINT"/>
+            <column name="f_security" type="BIGINT"/>
+            <column name="f_to" type="BIGINT"/>
+            <column name="fromreconciled" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_transaction_pkey"/>
+            </column>
+            <column name="reconciled" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="timestamp" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="xid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="payee" type="VARCHAR(255)"/>
+            <column name="payer" type="VARCHAR(255)"/>
+            <column name="revisions" type="VARCHAR(255)"/>
+            <column name="tags" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-9">
+        <addUniqueConstraint columnNames="currency_id, date" constraintName="onerateperdate" tableName="f_rates"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-10">
+        <createTable tableName="f_quotation">
+            <column name="date" type="date">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_quotation_pkey"/>
+            </column>
+            <column name="value" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="security_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="f_quotation_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-11">
+        <addForeignKeyConstraint baseColumnNames="f_from" baseTableName="f_transaction" constraintName="fk4tbj1ksiufxmfgj4e7riscndu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_account" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-12">
+        <addForeignKeyConstraint baseColumnNames="f_debt" baseTableName="f_transaction" constraintName="fk6b8eaigalfkv36goreg1lgn9n" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_account" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-13">
+        <addForeignKeyConstraint baseColumnNames="security_id" baseTableName="f_quotation" constraintName="fk7vapm8es0mqa0p6jjvfkxq82n" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_security" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-14">
+        <addForeignKeyConstraint baseColumnNames="currency_id" baseTableName="f_rates" constraintName="fkg5qjvyh7jeu50jkmgnsat8t5o" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_currency" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-15">
+        <addForeignKeyConstraint baseColumnNames="f_security" baseTableName="f_transaction" constraintName="fkgk827rxl6s7wbadm2w8hrjl2s" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_security" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-16">
+        <addForeignKeyConstraint baseColumnNames="account" baseTableName="f_transaction" constraintName="fkky4brbxa9o1rloys88ynd8ea4" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_account" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-17">
+        <addForeignKeyConstraint baseColumnNames="f_category" baseTableName="f_transaction" constraintName="fklcxf44nwvtfydsjmdvvr5101d" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_category" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-18">
+        <addForeignKeyConstraint baseColumnNames="f_to" baseTableName="f_transaction" constraintName="fkn90m7njd59e8s52hxohqop1yl" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_account" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-19">
+        <addForeignKeyConstraint baseColumnNames="recurrence_id" baseTableName="f_schedule" constraintName="fkntf9oxd2erf652efeg4jmhlgm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_recurrence" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-20">
+        <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="f_security" constraintName="fkpcpd4agflsjuymob43qu98b3l" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_account" validate="true"/>
+    </changeSet>
+    <changeSet author="mw (generated)" id="1719253502540-21">
+        <addForeignKeyConstraint baseColumnNames="transaction_id" baseTableName="f_schedule" constraintName="fkq4soibp8y5iogtwjmjjq895kf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="f_transaction" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
