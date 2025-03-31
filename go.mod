@@ -1,4 +1,4 @@
-module KostalReader
+module pvgo
 
 go 1.23.0
 
