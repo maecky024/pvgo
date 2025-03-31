@@ -1,0 +1,14 @@
+debug: true
+server:
+  host: "0.0.0.0"
+  port: 8000
+
+# Database credentials
+database:
+  runLiquibase: true
+  #host: "debian1.maecky.net"
+  host: "localhost"
+  port: 5432
+  user: "username"
+  pass: "password"
+  dbname: "finance"

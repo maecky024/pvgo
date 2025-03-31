@@ -1,11 +1,11 @@
 package main
 
 import (
-	modbusclient "KostalReader/modbus"
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	modbusclient "pvgo/internal/modbus"
 	"time"
 )
 

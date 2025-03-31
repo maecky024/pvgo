@@ -1,4 +1,4 @@
-package modbusclient
+package modbus
 
 import (
 	"github.com/gin-gonic/gin"

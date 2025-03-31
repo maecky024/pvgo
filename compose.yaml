@@ -1,0 +1,8 @@
+services:
+  pvgo:
+    build:
+      dockerfile:  ./docker/Dockerfile
+      context: ./
+    ports:
+      - "8000:8000"
+    image: pvgo

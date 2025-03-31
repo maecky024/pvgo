@@ -1,0 +1,2 @@
+- **DONE** Implement getSum for Accounts
+- **DONE** Implement getSum logic for Securities
