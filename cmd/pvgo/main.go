@@ -4,7 +4,13 @@ import (
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"log"
 	"net/http"
+	"os"
+	"os/exec"
+	"pvgo/internal/config"
+	"pvgo/internal/controller"
 	modbusclient "pvgo/internal/modbus"
 	"time"
 )
@@ -32,7 +38,45 @@ func GetError(c *gin.Context) {
 	c.JSON(http.StatusForbidden, resp)
 }
 
+var myConfig config.Config
+var db *pgxpool.Pool
+
 func main() {
+
+	config.ReadFile(&myConfig, "config.yaml")
+
+	log.Println("Debug mode: ", myConfig.Debug)
+
+	if myConfig.Database.RunLiquibase {
+		err := os.Chdir("liquibase")
+		if err != nil {
+			log.Println("Unable to change directory to liquibase:", err)
+			return
+		}
+
+		cmd := exec.Command("liquibase", "update")
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Println("\n\b", string(output))
+			return
+		}
+		log.Println(string(output))
+		err = os.Chdir("..")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+	}
+
+	if !myConfig.Debug {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
+	db := controller.ConnectDB()
+
+	if db == nil {
+		panic("Error opening DB")
+	}
 
 	router := gin.Default()
 	defaultConfig := cors.DefaultConfig()
@@ -54,4 +98,5 @@ func main() {
 		return
 	}
 	fmt.Println("Shutdown")
+	defer db.Close()
 }
